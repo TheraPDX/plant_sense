@@ -1,0 +1,17 @@
+int humidSensor = A0;
+int soilSensor = A1;
+
+float humid;
+float temp;
+
+void setup()
+{
+    pinMode(humidSensor, INPUT);
+    pinMode(soilSensor, INPUT);
+}
+
+void loop()
+{
+    humid = analogRead(humidSensor);
+    temp = analogRead(soilSensor);
+}
