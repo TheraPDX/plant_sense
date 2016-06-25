@@ -1,36 +1,49 @@
-int humidSensor = A0;
-int soilSensor = A1;
+// Sensor Pins
+int soilSensor = A0;
 
-float humid;
-float soil;
+// Sensor Values
+int soil;
 
-int store[1000];
+// Flag for watering plant
+// Is the soil dry?
+bool dry = false;
 
 void setup()
 {
-    Serial.begin(9600);
+    // Cloud variables
+    Particle.variable("soil", &soil, INT);
 
-    pinMode(humidSensor, INPUT);
+    // Pin Initialization
     pinMode(soilSensor, INPUT);
 }
 
 void loop()
 {
-    int i = 0;
-
-    for(i = 0; i <= 1000 ; i++)
-    {
-      humid = analogRead(humidSensor);
       soil = analogRead(soilSensor);
 
-      store[i] = soil;
-    }
+      if (soil > 100)
+      {
+        if (dry == true)
+        {
+            Particle.publish("soilStatus", "Plant is Hydrated!");
+            dry = false;
+        }
+        else
+        {
+            // Do nothing
+        }
+      }
+      else
+      {
+        if (dry == false)
+        {
+            Particle.publish("soilStatus", "Please Water!");
+            dry = true;
+        }
+        else
+        {
+            // Do nothing
+        }
+      }
 
-
-    for(i = 0; i <= 1000; i++)
-    {
-      Serial.println(store[i]);
-    }
-    
-    delay(3600000);
 }
