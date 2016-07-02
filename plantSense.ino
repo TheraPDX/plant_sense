@@ -27,7 +27,7 @@ int humidity;
 
 // Flag for watering plant
 // Is the soil dry?
-bool dry = false;
+int dry = 0;
 
 void setup()
 {
@@ -35,6 +35,7 @@ void setup()
     Particle.variable("soil", &soil, INT);
     Particle.variable("tempF", &tempF, INT);
     Particle.variable("humidity", &humidity, INT);
+    Particle.variable("dry", &dry, INT);
 
     // Pin Initialization
     pinMode(soilSensor, INPUT);
@@ -60,31 +61,14 @@ void loop()
       tempF = (tempC * 1.8) + 32;
 
 
-      // Logic to publish whether or not the plant
-      // needs to be watered
-      if (soil > 100)
+      if (soil < 100)
       {
-        if (dry == true)
-        {
-            Particle.publish("soilStatus", "Plant is Hydrated!");
-            dry = false;
-        }
-        else
-        {
-            // Do nothing
-        }
+          dry = 1;
       }
       else
       {
-        if (dry == false)
-        {
-            Particle.publish("soilStatus", "Please Water!");
-            dry = true;
-        }
-        else
-        {
-            // Do nothing
-        }
+          dry = 0;
       }
+
 
 }
