@@ -61,7 +61,7 @@ void loop()
       tempF = (tempC * 1.8) + 32;
 
 
-      if (soil < 100)
+      if (soil < 2000)
       {
           dry = 1;
       }

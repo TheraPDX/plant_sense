@@ -20,7 +20,7 @@ def getSoil():
 
     soil = int(soilText)
     print(soilText)
-    return
+    return soil
 
 # Function to get temp sensor value
 def getTemp():
@@ -29,7 +29,7 @@ def getTemp():
 
     temp = int(tempText)
     print(temp)
-    return
+    return temp
 
 # Function to get humidity sensor value
 def getHumidity():
@@ -38,7 +38,7 @@ def getHumidity():
 
     humidity = int(HumidityText)
     print(humidity)
-    return
+    return humidity 
 
 # Function to send email when plant needs to be watered
 def sendEmail():
@@ -64,9 +64,10 @@ def main():
         dry = getSoilStatus()
         # Get soil sensor value
         soil = getSoil()
+        int
 
         # This logic is used to pervent multiple emails during a single event
-        if (soil > 1500):         # If the soil is wet, and the status before was dry, change the status to wet
+        if (soil > 2000):         # If the soil is wet, and the status before was dry, change the status to wet
             if (dry == 1):
                 dry = 0
             else:
